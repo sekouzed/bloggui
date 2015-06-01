@@ -11,6 +11,27 @@ use App\Controller\AppController;
 class PostsController extends AppController
 {
 
+//
+//    public function isAuthorized($user)
+//    {
+//        if ($this->request->action === 'add') {
+//            return true;
+//        }
+//
+//        if (in_array($this->request->action, ['edit', 'delete'])) {
+//            $postId = (int)$this->request->params['pass'][0];
+//            if ($this->Articles->isOwnedBy($postId, $user['id'])) {
+//                return true;
+//            }
+//        }
+//
+//        return parent::isAuthorized($user);
+//    }
+//
+//    public function isOwnedBy($postId, $userId)
+//    {
+//        return $this->exists(['id' => $postId, 'user_id' => $userId]);
+//    }
     /**
      * Index method
      *

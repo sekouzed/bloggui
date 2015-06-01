@@ -15,6 +15,9 @@
             </div>
             <hr>
             <div class="form-group">
+                <?= $this->Form->input('name',['class'=>'form-control']); ?>
+            </div>
+            <div class="form-group">
                 <?= $this->Form->input('email',['class'=>'form-control']); ?>
             </div>
             <div class="form-group">

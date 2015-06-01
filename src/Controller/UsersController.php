@@ -2,50 +2,67 @@
 namespace App\Controller;
 
 use App\Controller\AppController;
+use Cake\Event\Event;
+use Cake\Network\Exception\NotFoundException;
 
-/**
- * Users Controller
- *
- * @property \App\Model\Table\UsersTable $Users
- */
+
 class UsersController extends AppController
 {
-    public function login()
+    public function isAuthorized($user)
+    {
+        if ($this->request->action === 'profil') {
+            return true;
+        }
+        if (isset($user['role']) && $user['role'] === 'admin') {
+            return true;
+        }
+        return parent::isAuthorized($user);
+    }
+
+    public function beforeFilter(Event $event)
+    {
+        parent::beforeFilter($event);
+        $this->Auth->allow(['add','logout']);
+    }
+
+    public function profil()
     {
 
     }
-    /**
-     * Index method
-     *
-     * @return void
-     */
+
+    public function login()
+    {
+        if ($this->request->is('post')) {
+            $user = $this->Auth->identify();
+            if ($user) {
+                $this->Auth->setUser($user);
+                $this->Flash->success(__('Vous etez connectez.'));
+                return $this->redirect($this->Auth->redirectUrl());
+            }
+            $this->Flash->error(__("Nom d'utilisateur ou mot de passe incorrect, essayez à nouveau."));
+        }
+    }
+
+    public function logout()
+    {
+        return $this->redirect($this->Auth->logout());
+    }
+
     public function index()
     {
         $this->set('users', $this->paginate($this->Users));
         $this->set('_serialize', ['users']);
     }
 
-    /**
-     * View method
-     *
-     * @param string|null $id User id.
-     * @return void
-     * @throws \Cake\Network\Exception\NotFoundException When record not found.
-     */
+
     public function view($id = null)
     {
         $user = $this->Users->get($id, [
             'contain' => ['Blogs']
         ]);
         $this->set('user', $user);
-        $this->set('_serialize', ['user']);
     }
 
-    /**
-     * Add method
-     *
-     * @return void Redirects on successful add, renders view otherwise.
-     */
     public function add()
     {
         $user = $this->Users->newEntity();
@@ -64,16 +81,9 @@ class UsersController extends AppController
         }
         $domains = $this->Users->Blogs->Domains->find('list');
         $this->set(compact('user', 'domains'));
-        $this->set('_serialize', ['user']);
     }
 
-    /**
-     * Edit method
-     *
-     * @param string|null $id User id.
-     * @return void Redirects on successful edit, renders view otherwise.
-     * @throws \Cake\Network\Exception\NotFoundException When record not found.
-     */
+
     public function edit($id = null)
     {
         $user = $this->Users->get($id, [
@@ -89,16 +99,8 @@ class UsersController extends AppController
             }
         }
         $this->set(compact('user'));
-        $this->set('_serialize', ['user']);
     }
 
-    /**
-     * Delete method
-     *
-     * @param string|null $id User id.
-     * @return void Redirects to index.
-     * @throws \Cake\Network\Exception\NotFoundException When record not found.
-     */
     public function delete($id = null)
     {
         $this->request->allowMethod(['post', 'delete']);

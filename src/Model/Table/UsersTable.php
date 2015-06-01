@@ -13,12 +13,6 @@ use Cake\Validation\Validator;
 class UsersTable extends Table
 {
 
-    /**
-     * Initialize method
-     *
-     * @param array $config The configuration for the Table.
-     * @return void
-     */
     public function initialize(array $config)
     {
         $this->table('users');
@@ -29,12 +23,6 @@ class UsersTable extends Table
         ]);
     }
 
-    /**
-     * Default validation rules.
-     *
-     * @param \Cake\Validation\Validator $validator Validator instance.
-     * @return \Cake\Validation\Validator
-     */
     public function validationDefault(Validator $validator)
     {
         $validator
@@ -42,8 +30,11 @@ class UsersTable extends Table
             ->allowEmpty('id', 'create');
             
         $validator
-            ->add('email', 'valid', ['rule' => 'email'])
-            ->notEmpty('email');
+            ->add('email', 'valid', [
+                'rule' => 'email',
+                'message' => 'Email incorrect'
+            ])
+            ->notEmpty('email', "Un email est nécessaire");
             
         $validator
             ->add('password', [
@@ -52,14 +43,14 @@ class UsersTable extends Table
                     'message' => '4 caractères au minimum'
                 ]
             ])
-            ->notEmpty('password');
-            
+            ->notEmpty('password', "Un nom d'utilisateur est nécessaire");
+
         $validator
             ->allowEmpty('photo');
             
         $validator
-            ->notEmpty('name');
-            
+            ->notEmpty('name', "Un email est nécessaire");
+
         $validator
             ->allowEmpty('biography');
             
@@ -95,13 +86,6 @@ class UsersTable extends Table
         return $validator;
     }
 
-    /**
-     * Returns a rules checker object that will be used for validating
-     * application integrity.
-     *
-     * @param \Cake\ORM\RulesChecker $rules The rules object to be modified.
-     * @return \Cake\ORM\RulesChecker
-     */
     public function buildRules(RulesChecker $rules)
     {
         $rules->add($rules->isUnique(['email']));

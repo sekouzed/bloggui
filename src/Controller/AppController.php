@@ -17,46 +17,53 @@ namespace App\Controller;
 use Cake\Controller\Controller;
 use Cake\Event\Event;
 
-/**
- * Application Controller
- *
- * Add your application-wide methods in the class below, your controllers
- * will inherit them.
- *
- * @link http://book.cakephp.org/3.0/en/controllers.html#the-app-controller
- */
+
 class AppController extends Controller
 {
 
-    /**
-     * Initialization hook method.
-     *
-     * Use this method to add common initialization code like loading components.
-     *
-     * @return void
-     */
     public function initialize()
     {
         parent::initialize();
         $this->loadComponent('Flash');
-//        $this->loadComponent('Auth', [
-//            'authorize' => ['Controller'],
-//            'loginRedirect' => [
-//                'controller' => 'Pages',
-//                'action' => 'display', 'home'
-//            ],
-//            'logoutRedirect' => [
-//                'controller' => 'Users',
-//                'action' => 'login'
-//            ]//,
-////            'unauthorizedRedirect' => [
-////            'controller' => 'Syndics',
-////            'action' => 'dashboard'
-////            ]
-//        ]);
+        $this->loadComponent('Auth', [
+            'authorize' => ['Controller'],
+            'loginRedirect' => [
+                'controller' => 'Pages',
+                'action' => 'display',
+                'home'
+            ],
+            'logoutRedirect' => [
+                'controller' => 'Users',
+                'action' => 'logout'
+            ],
+            'authError' => __('Vous devez vous identifier pour effectuer cette requette'),
+            'authenticate' => [
+                'Form' => [
+                    'fields' => ['username' => 'email']
+                ]
+            ]
+        ]);
     }
-//    public function beforeFilter(Event $event)
-//    {
-//        $this->Auth->allow(['index', 'view', 'display']);
-//    }
+
+    public function isAuthorized($user)
+    {
+        return true;
+    }
+
+    public function beforeFilter(Event $event)
+    {
+        $this->Auth->allow(['display']);
+    }
+
+    public function beforeRender(Event $event)
+    {
+        if ($this->Auth->user()) {
+            $this->layout = $this->Auth->user('role') ;
+        }
+        if($this->request->is('ajax')){
+            $this->layout = 'ajax';
+        }
+    }
+
+
 }

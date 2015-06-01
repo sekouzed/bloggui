@@ -57,19 +57,23 @@ License: You must have a valid license purchased only from themeforest(the above
         <div class="lock-head">
             Locked
         </div>
-        <div class="lock-body">
+        <div class="lock-body" style="color: #fff">
 
-            <form class="lock-formX" action="index.html" method="post">
+            <?= $this->Flash->render('auth') ?>
+            <?= $this->Form->create() ?>
+                <legend style="color: #fff;text-align: center">
+                    <?= __("Merci de rentrer vos nom d'utilisateur et mot de passe") ?>
+                </legend>
                 <div class="form-group">
-                    <input class="form-control placeholder-no-fix" type="email" autocomplete="off" placeholder="email" name="password"/>
+                    <?= $this->Form->input('email',['type'=>'email','class'=>'form-control placeholder-no-fix']) ?>
                 </div>
                 <div class="form-group">
-                    <input class="form-control placeholder-no-fix" type="password" autocomplete="off" placeholder="Password" name="password"/>
+                    <?= $this->Form->input('password',['class'=>'form-control placeholder-no-fix']) ?>
                 </div>
                 <div class="form-actions">
-                    <button type="submit" class="btn btn-success uppercase">Login</button>
+                    <?= $this->Form->button(__('Se Connecter'),['class'=>'btn btn-success uppercase']); ?>
                 </div>
-            </form>
+            <?= $this->Form->end() ?>
         </div>
         <div class="lock-bottom">
             <a href="">Not Amanda Smith?</a>

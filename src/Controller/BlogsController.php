@@ -3,19 +3,34 @@ namespace App\Controller;
 
 use App\Controller\AppController;
 
-/**
- * Blogs Controller
- *
- * @property \App\Model\Table\BlogsTable $Blogs
- */
+
 class BlogsController extends AppController
 {
+    public function isAuthorized($user)
+    {
+        if ($this->request->action === 'show') {
+            return true;
+        }
+        if (isset($user['role']) && $user['role'] === 'admin') {
+            return true;
+        }
+        if (isset($user['role']) && $user['role'] === 'author') {
 
-    /**
-     * Index method
-     *
-     * @return void
-     */
+            if ($this->request->action === 'edit') {
+                $blogId = (int)$this->request->params['pass'][0];
+                if ($this->Blogs->isOwnedBlog($blogId, $user['id'])) {
+                    return true;
+                }
+            }
+        }
+        return parent::isAuthorized($user);
+    }
+
+    public function isOwnedBlog($blogId, $userId)
+    {
+        return $this->exists(['id' => $blogId, 'user_id' => $userId]);
+    }
+
     public function index()
     {
         $this->paginate = [
@@ -25,13 +40,6 @@ class BlogsController extends AppController
         $this->set('_serialize', ['blogs']);
     }
 
-    /**
-     * View method
-     *
-     * @param string|null $id Blog id.
-     * @return void
-     * @throws \Cake\Network\Exception\NotFoundException When record not found.
-     */
     public function view($id = null)
     {
         $blog = $this->Blogs->get($id, [
@@ -41,11 +49,6 @@ class BlogsController extends AppController
         $this->set('_serialize', ['blog']);
     }
 
-    /**
-     * Add method
-     *
-     * @return void Redirects on successful add, renders view otherwise.
-     */
     public function add()
     {
         $blog = $this->Blogs->newEntity();
@@ -64,13 +67,6 @@ class BlogsController extends AppController
         $this->set('_serialize', ['blog']);
     }
 
-    /**
-     * Edit method
-     *
-     * @param string|null $id Blog id.
-     * @return void Redirects on successful edit, renders view otherwise.
-     * @throws \Cake\Network\Exception\NotFoundException When record not found.
-     */
     public function edit($id = null)
     {
         $blog = $this->Blogs->get($id, [
@@ -91,13 +87,6 @@ class BlogsController extends AppController
         $this->set('_serialize', ['blog']);
     }
 
-    /**
-     * Delete method
-     *
-     * @param string|null $id Blog id.
-     * @return void Redirects to index.
-     * @throws \Cake\Network\Exception\NotFoundException When record not found.
-     */
     public function delete($id = null)
     {
         $this->request->allowMethod(['post', 'delete']);
