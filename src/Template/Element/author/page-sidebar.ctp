@@ -65,42 +65,13 @@
                 </li>
             </ul>
         </li>
-        <li>
-            <?= $this->Html->link(
-                '<i class="icon-settings"></i>'.
-                '<span class="title">'.__('Params').'</span>'.
-                '<span class="arrow"></span>',
-                'javascript:;',
-                ['class'=>'','escape'=>false]
-            )?>
-            <ul class="sub-menu">
-                <li>
-                    <?= $this->Html->link(
-                        '<i class="icon-equalizer"></i>'.
-                        '<span class="title">'.__('Blogs params').'</span>',
-                        ['controller' => 'Blogs', 'action' => 'edit',1],
-                        ['class'=>'','escape'=>false]
-                    )?>
-                </li>
-                <li>
-                    <?= $this->Html->link(
-                        '<i class="icon-user"></i>'.
-                        '<span class="title">'.__('Profil').'</span>',
-                        ['controller' => 'Users', 'action' => 'profil',1],
-                        ['class'=>'','escape'=>false]
-                    )?>
-                </li>
-            </ul>
-        </li>
         <li class="last">
             <?= $this->Html->link(
-                '<i class="icon-action-undo"></i>'.
-                '<span class="title">'.__('Return to blog').'</span>'.
-                '<span class="selected"></span>',
-                ['controller' => 'Blogs', 'action' => 'show'],
+                '<i class="icon-settings"></i>'.
+                '<span class="title">'.__('Params').'</span>',
+                ['controller' => 'syndics', 'action' => 'dashboard'],
                 ['class'=>'','escape'=>false]
             )?>
         </li>
     </ul>
-    <!-- END SIDEBAR MENU -->
 </div>
