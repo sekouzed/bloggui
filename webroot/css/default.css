@@ -1,0 +1,9 @@
+
+body {
+    background: #4A4A4A;
+}
+#wrapper {
+    background: #fff;
+    max-width: 1170px;
+    margin: auto;
+}

@@ -1,0 +1,23 @@
+.error-message {
+    background-color: #f2dede;
+    /* border: 1px solid #ebccd1; */
+    color: #a94442;
+    padding: 0 5px;
+    /*margin: 1px 0;*/
+}
+/*.error .form-control {*/
+    /*border-color: #ebccd1;  */
+    /*border-color: #a94442;*/
+/*}*/
+.form-error {
+    /*border-color: #ebccd1;  */
+    border-color: #a94442;
+}
+
+/*.row-actions{*/
+
+/*}*/
+/*.row-actions a{*/
+    /*font-size: 18px !important;*/
+    /*margin-right: 5px;*/
+/*}*/
