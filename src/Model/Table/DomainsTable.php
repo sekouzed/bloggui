@@ -22,7 +22,7 @@ class DomainsTable extends Table
     public function initialize(array $config)
     {
         $this->table('domains');
-        $this->displayField('tilte');
+        $this->displayField('title');
         $this->primaryKey('id');
         $this->hasMany('Blogs', [
             'foreignKey' => 'domain_id'

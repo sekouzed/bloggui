@@ -10,6 +10,9 @@
             <div class="form-group">
                 <?= $this->Form->input('blog.slug',['class'=>'form-control']); ?>
             </div>
+            <div class="form-group">
+                <?= $this->Form->input('blog.domain_id',['class'=>'form-control','options' => $domains]); ?>
+            </div>
             <hr>
             <div class="form-group">
                 <?= $this->Form->input('email',['class'=>'form-control']); ?>

@@ -62,7 +62,8 @@ class UsersController extends AppController
                 $this->Flash->error(__('The user could not be saved. Please, try again.'));
             }
         }
-        $this->set(compact('user'));
+        $domains = $this->Users->Blogs->Domains->find('list');
+        $this->set(compact('user', 'domains'));
         $this->set('_serialize', ['user']);
     }
 
