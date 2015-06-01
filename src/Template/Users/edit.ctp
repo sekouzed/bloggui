@@ -2,7 +2,7 @@
 <div class="row">
     <div class="col-md-6">
         <?= $this->Form->create($user) ?>
-        <legend><?= __('Add User') ?></legend>
+        <legend><?= __('Edit User') ?></legend>
         <div class="form-body">
             <div class="form-group">
                 <?= $this->Form->input('email',['class'=>'form-control']); ?>
@@ -17,7 +17,9 @@
                 <?= $this->Form->input('name',['class'=>'form-control']); ?>
             </div>
             <div class="form-group">
-                <?= $this->Form->input('gender',['class'=>'form-control']); ?>
+                <?= $this->Form->input('gender', ['class'=>'form-control',
+                    'options' => ['male'=>__('male'),'female' => __('female')]
+                ])?>
             </div>
             <div class="form-group">
                 <?= $this->Form->input('birthday',['class'=>'form-control','empty' => true, 'default' => '']); ?>
@@ -32,10 +34,14 @@
                 <?= $this->Form->input('city',['class'=>'form-control']); ?>
             </div>
             <div class="form-group">
-                <?= $this->Form->input('role',['class'=>'form-control']); ?>
+                <?= $this->Form->input('role', ['class'=>'form-control',
+                    'options' => ['author'=>__('author'),'admin' => __('admin')]
+                ])?>
             </div>
             <div class="form-group">
-                <?= $this->Form->input('state',['class'=>'form-control']); ?>
+                <?= $this->Form->input('state', ['class'=>'form-control',
+                    'options' => ['disable'=>__('disable'),'enable' => __('enable')]
+                ])?>
             </div>
             <div class="form-actions">
                 <?= $this->Form->button(__('Submit'),['class'=>'btn blue']) ?>

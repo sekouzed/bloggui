@@ -1,20 +1,44 @@
 
+<div class="row">
+    <div class="col-md-6">
+        <?= $this->Form->create($user) ?>
+        <legend><?= __('Edit User') ?></legend>
+        <div class="form-body">
+            <div class="form-group">
+                <?= $this->Form->input('email',['class'=>'form-control']); ?>
+            </div>
+            <div class="form-group">
+                <?= $this->Form->input('password',['class'=>'form-control']); ?>
+            </div>
+            <div class="form-group">
+                <?= $this->Form->input('photo',['class'=>'form-control']); ?>
+            </div>
+            <div class="form-group">
+                <?= $this->Form->input('name',['class'=>'form-control']); ?>
+            </div>
+            <div class="form-group">
+                <?= $this->Form->input('gender', ['class'=>'form-control',
+                    'options' => ['male'=>__('male'),'female' => __('female')]
+                ])?>
+            </div>
+            <div class="form-group">
+                <?= $this->Form->input('birthday',['class'=>'form-control','empty' => true, 'default' => '']); ?>
+            </div>
+            <div class="form-group">
+                <?= $this->Form->input('biography',['class'=>'form-control']); ?>
+            </div>
+            <div class="form-group">
+                <?= $this->Form->input('country',['class'=>'form-control']); ?>
+            </div>
+            <div class="form-group">
+                <?= $this->Form->input('city',['class'=>'form-control']); ?>
+            </div>
 
-<?php $this->assign('title', __('Mon profil'));?>
-
-<div class="users form">
-    <?= $this->Form->create($user,['class'=>'form-horizontal']); ?>
-
-    <div class="control-group"><?= $this->Form->input('nom_complet')?></div>
-    <div class="control-group"><?= $this->Form->input('email')?></div>
-    <div class="control-group"><?= $this->Form->input('tel')?></div>
-    <div class="control-group"><?= $this->Form->input('password')?></div>
-    <div class="control-group"><?= $this->Form->input('username')?></div>
-
-
-    <div class="control-group form-footer">
-        <?= $this->Form->button(__('Envoyer'),['class'=>'btn btn-info']) ?>
+            <div class="form-actions">
+                <?= $this->Form->button(__('Submit'),['class'=>'btn blue']) ?>
+                <?= $this->Html->link(__('Cancel'), ['action' => 'index'],['class'=>'btn default']) ?>
+            </div>
+        </div>
+        <?= $this->Form->end() ?>
     </div>
-    <?= $this->Form->end() ?>
 </div>
- 
