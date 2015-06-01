@@ -2,6 +2,7 @@
 <div class="row form">
     <div class="col-md-6">
         <legend><?= __('View Domain').' #'.$this->Number->format($domain->id)?></legend>
+
         <div class="form-body">
             <h6><?= __('Title') ?></h6>
             <p><?= h($domain->title) ?></p>
