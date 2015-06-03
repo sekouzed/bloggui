@@ -7,9 +7,10 @@
                 '<i class="icon-speedometer"></i>'.
                 '<span class="title">'.__('Dashboard').'</span>'.
                 '<span class="selected"></span>',
-                ['controller' => 'syndics', 'action' => 'dashboard'],
+                ['controller' => 'Blogs', 'action' => 'dashboard'],
                 ['class'=>'','escape'=>false]
             )?>
+        </li>
         </li>
         <li>
             <?= $this->Html->link(
@@ -68,8 +69,8 @@
         <li class="last">
             <?= $this->Html->link(
                 '<i class="icon-settings"></i>'.
-                '<span class="title">'.__('Params').'</span>',
-                ['controller' => 'syndics', 'action' => 'dashboard'],
+                '<span class="title">'.__('Config').'</span>',
+                ['controller' => 'Blogs', 'action' => 'config'],
                 ['class'=>'','escape'=>false]
             )?>
         </li>

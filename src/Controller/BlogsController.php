@@ -8,9 +8,6 @@ class BlogsController extends AppController
 {
     public function isAuthorized($user)
     {
-        if ($this->request->action === 'show') {
-            return true;
-        }
         if (isset($user['role']) && $user['role'] === 'admin') {
             return true;
         }
@@ -29,6 +26,16 @@ class BlogsController extends AppController
     public function isOwnedBlog($blogId, $userId)
     {
         return $this->exists(['id' => $blogId, 'user_id' => $userId]);
+    }
+
+    public function home($slug = null)
+    {
+        $blog = $this->Blogs->find('slug', [
+            'slug' => $slug,'contain' => ['Users', 'Domains', 'Posts', 'Rubrics']
+        ])->first();
+
+        $this->set('blog', $blog);
+        $this->set('_serialize', ['blog']);
     }
 
     public function index()

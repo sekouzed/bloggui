@@ -1,48 +1,23 @@
 <?php
-namespace App\Controller;
+namespace App\Controller\Admin;
 
 use App\Controller\AppController;
 
-/**
- * Domains Controller
- *
- * @property \App\Model\Table\DomainsTable $Domains
- */
 class DomainsController extends AppController
 {
-
-    /**
-     * Index method
-     *
-     * @return void
-     */
     public function index()
     {
         $this->set('domains', $this->paginate($this->Domains));
-        $this->set('_serialize', ['domains']);
     }
 
-    /**
-     * View method
-     *
-     * @param string|null $id Domain id.
-     * @return void
-     * @throws \Cake\Network\Exception\NotFoundException When record not found.
-     */
     public function view($id = null)
     {
         $domain = $this->Domains->get($id, [
             'contain' => ['Blogs']
         ]);
         $this->set('domain', $domain);
-        $this->set('_serialize', ['domain']);
     }
 
-    /**
-     * Add method
-     *
-     * @return void Redirects on successful add, renders view otherwise.
-     */
     public function add()
     {
         $domain = $this->Domains->newEntity();
@@ -56,16 +31,8 @@ class DomainsController extends AppController
             }
         }
         $this->set(compact('domain'));
-        $this->set('_serialize', ['domain']);
     }
 
-    /**
-     * Edit method
-     *
-     * @param string|null $id Domain id.
-     * @return void Redirects on successful edit, renders view otherwise.
-     * @throws \Cake\Network\Exception\NotFoundException When record not found.
-     */
     public function edit($id = null)
     {
         $domain = $this->Domains->get($id, [
@@ -81,16 +48,8 @@ class DomainsController extends AppController
             }
         }
         $this->set(compact('domain'));
-        $this->set('_serialize', ['domain']);
     }
 
-    /**
-     * Delete method
-     *
-     * @param string|null $id Domain id.
-     * @return void Redirects to index.
-     * @throws \Cake\Network\Exception\NotFoundException When record not found.
-     */
     public function delete($id = null)
     {
         $this->request->allowMethod(['post', 'delete']);

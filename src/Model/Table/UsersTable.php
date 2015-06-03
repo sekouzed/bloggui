@@ -18,8 +18,9 @@ class UsersTable extends Table
         $this->table('users');
         $this->displayField('name');
         $this->primaryKey('id');
-        $this->hasOne('Blogs', [
-            'foreignKey' => 'user_id'
+        $this->belongsTo('Blogs', [
+            'foreignKey' => 'blog_id',
+            'joinType' => 'INNER'
         ]);
     }
 
@@ -88,6 +89,7 @@ class UsersTable extends Table
 
     public function buildRules(RulesChecker $rules)
     {
+        $rules->add($rules->existsIn(['blog_id'], 'Blogs'));
         $rules->add($rules->isUnique(['email']));
         return $rules;
     }

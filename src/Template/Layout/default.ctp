@@ -81,28 +81,23 @@
         <?= $this->element('footer') ?>
     </div>
 </div>
-<!-- Load javascripts at bottom, this will reduce page load time -->
-<!-- BEGIN CORE PLUGINS (REQUIRED FOR ALL PAGES) -->
 <!--[if lt IE 9]>
-<script src="../assets/global/plugins/respond.min.js"></script>
+<?=  $this->Html->script('../assets/global/plugins/respond.min') ?>
 <![endif]-->
-<script src="../assets/global/plugins/jquery.min.js" type="text/javascript"></script>
-<script src="../assets/global/plugins/jquery-migrate.min.js" type="text/javascript"></script>
-<script src="../assets/global/plugins/bootstrap/js/bootstrap.min.js" type="text/javascript"></script>
-<script src="../assets/frontend/layout/scripts/back-to-top.js" type="text/javascript"></script>
-<!-- END CORE PLUGINS -->
+<?=  $this->Html->script('../assets/global/plugins/jquery.min') ?>
+<?=  $this->Html->script('../assets/global/plugins/jquery-migrate.min') ?>
+<?=  $this->Html->script('../assets/global/plugins/bootstrap/js/bootstrap.min') ?>
+<?=  $this->Html->script('../assets/frontend/layout/scripts/back-to-top') ?>
 
-<!-- BEGIN PAGE LEVEL JAVASCRIPTS (REQUIRED ONLY FOR CURRENT PAGE) -->
-<script src="../assets/global/plugins/fancybox/source/jquery.fancybox.pack.js" type="text/javascript"></script><!-- pop up -->
+<?=  $this->Html->script('../assets/global/plugins/fancybox/source/jquery.fancybox.pack') ?><!-- pop up -->
 
-<script src="../assets/frontend/layout/scripts/layout.js" type="text/javascript"></script>
+<?=  $this->Html->script('../assets/frontend/layout/scripts/layout') ?>
 <script type="text/javascript">
     jQuery(document).ready(function() {
         Layout.init();
         Layout.initTwitter();
     });
 </script>
-<!-- END PAGE LEVEL JAVASCRIPTS -->
 
 </body>
 </html>

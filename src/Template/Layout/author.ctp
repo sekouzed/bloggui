@@ -106,25 +106,24 @@
 		</div>
 	</div>
     <div class="scroll-to-top"> <i class="icon-arrow-up"></i> </div>
-
     <!--[if lt IE 9]>
-    <script src="../../assets/global/plugins/respond.min.js"></script>
-    <script src="../../assets/global/plugins/excanvas.min.js"></script>
+    <?= $this->Html->script('../assets/global/plugins/respond.min') ?>
+    <?= $this->Html->script('../assets/global/plugins/excanvas.min') ?>
     <![endif]-->
-    <script src="../../assets/global/plugins/jquery.min.js" type="text/javascript"></script>
-    <script src="../../assets/global/plugins/jquery-migrate.min.js" type="text/javascript"></script>
+    <?= $this->Html->script('../assets/global/plugins/jquery.min') ?>
+    <?= $this->Html->script('../assets/global/plugins/jquery-migrate.min') ?>
 
-    <script src="../../assets/global/plugins/jquery-ui/jquery-ui.min.js" type="text/javascript"></script>
-    <script src="../../assets/global/plugins/bootstrap/js/bootstrap.min.js" type="text/javascript"></script>
-    <script src="../../assets/global/plugins/bootstrap-hover-dropdown/bootstrap-hover-dropdown.min.js" type="text/javascript"></script>
-    <script src="../../assets/global/plugins/jquery-slimscroll/jquery.slimscroll.min.js" type="text/javascript"></script>
-    <script src="../../assets/global/plugins/jquery.blockui.min.js" type="text/javascript"></script>
-    <script src="../../assets/global/plugins/jquery.cokie.min.js" type="text/javascript"></script>
-    <script src="../../assets/global/plugins/uniform/jquery.uniform.min.js" type="text/javascript"></script>
-    <script src="../../assets/global/plugins/bootstrap-switch/js/bootstrap-switch.min.js" type="text/javascript"></script>
+    <?= $this->Html->script('../assets/global/plugins/jquery-ui/jquery-ui.min') ?>
+    <?= $this->Html->script('../assets/global/plugins/bootstrap/js/bootstrap.min') ?>
+    <?= $this->Html->script('../assets/global/plugins/bootstrap-hover-dropdown/bootstrap-hover-dropdown.min') ?>
+    <?= $this->Html->script('../assets/global/plugins/jquery-slimscroll/jquery.slimscroll.min') ?>
+    <?= $this->Html->script('../assets/global/plugins/jquery.blockui.min') ?>
+    <?= $this->Html->script('../assets/global/plugins/jquery.cokie.min') ?>
+    <?= $this->Html->script('../assets/global/plugins/uniform/jquery.uniform.min') ?>
+    <?= $this->Html->script('../assets/global/plugins/bootstrap-switch/js/bootstrap-switch.min') ?>
 
-    <script src="../../assets/global/scripts/metronic.js" type="text/javascript"></script>
-    <script src="../../assets/admin/layout2/scripts/layout.js" type="text/javascript"></script>
+    <?= $this->Html->script('../assets/global/scripts/metronic') ?>
+    <?= $this->Html->script('../assets/admin/layout2/scripts/layout') ?>
 
     <script>
         jQuery(document).ready(function() {

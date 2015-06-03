@@ -7,7 +7,7 @@
                 '<i class="icon-speedometer"></i>'.
                 '<span class="title">'.__('Dashboard').'</span>'.
                 '<span class="selected"></span>',
-                ['controller' => 'syndics', 'action' => 'dashboard'],
+                ['controller' => 'Blogs', 'action' => 'dashboard'],
                 ['class'=>'','escape'=>false]
             )?>
         </li>
@@ -41,83 +41,26 @@
         <li>
             <?= $this->Html->link(
                 '<i class="icon-book-open"></i>'.
-                '<span class="title">'.__('Blogs').'</span>'.
-                '<span class="arrow"></span>',
-                'javascript:;',
+                '<span class="title">'.__('Blogs').'</span>',
+                ['controller' => 'Blogs', 'action' => 'index'],
                 ['class'=>'','escape'=>false]
             )?>
-            <ul class="sub-menu">
-                <li>
-                    <?= $this->Html->link(
-                        '<i class="icon-list"></i>'.
-                        '<span class="title">'.__('List Blogs').'</span>',
-                        ['controller' => 'Blogs', 'action' => 'index'],
-                        ['class'=>'','escape'=>false]
-                    )?>
-                </li>
-                <li>
-                    <?= $this->Html->link(
-                        '<i class="icon-plus"></i>'.
-                        '<span class="title">'.__('New Blog').'</span>',
-                        ['controller' => 'Blogs', 'action' => 'add'],
-                        ['class'=>'','escape'=>false]
-                    )?>
-                </li>
-            </ul>
         </li>
         <li>
             <?= $this->Html->link(
                 '<i class="icon-tag"></i>'.
-                '<span class="title">'.__('Rubrics').'</span>'.
-                '<span class="arrow"></span>',
-                'javascript:;',
+                '<span class="title">'.__('Rubrics').'</span>',
+                ['controller' => 'Rubrics', 'action' => 'index'],
                 ['class'=>'','escape'=>false]
             )?>
-            <ul class="sub-menu">
-                <li>
-                    <?= $this->Html->link(
-                        '<i class="icon-list"></i>'.
-                        '<span class="title">'.__('List Rubrics').'</span>',
-                        ['controller' => 'Rubrics', 'action' => 'index'],
-                        ['class'=>'','escape'=>false]
-                    )?>
-                </li>
-                <li>
-                    <?= $this->Html->link(
-                        '<i class="icon-plus"></i>'.
-                        '<span class="title">'.__('New Rubric').'</span>',
-                        ['controller' => 'Rubrics', 'action' => 'add'],
-                        ['class'=>'','escape'=>false]
-                    )?>
-                </li>
-            </ul>
         </li>
         <li>
             <?= $this->Html->link(
                 '<i class="icon-note"></i>'.
-                '<span class="title">'.__('Posts').'</span>'.
-                '<span class="arrow"></span>',
-                'javascript:;',
+                '<span class="title">'.__('Posts').'</span>',
+                ['controller' => 'Posts', 'action' => 'index'],
                 ['class'=>'','escape'=>false]
             )?>
-            <ul class="sub-menu">
-                <li>
-                    <?= $this->Html->link(
-                        '<i class="icon-list"></i>'.
-                        '<span class="title">'.__('List Posts').'</span>',
-                        ['controller' => 'Posts', 'action' => 'index'],
-                        ['class'=>'','escape'=>false]
-                    )?>
-                </li>
-                <li>
-                    <?= $this->Html->link(
-                        '<i class="icon-plus"></i>'.
-                        '<span class="title">'.__('New Post').'</span>',
-                        ['controller' => 'Posts', 'action' => 'add'],
-                        ['class'=>'','escape'=>false]
-                    )?>
-                </li>
-            </ul>
         </li>
         <li class="last">
             <?= $this->Html->link(

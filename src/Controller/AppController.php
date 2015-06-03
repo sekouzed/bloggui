@@ -26,17 +26,16 @@ class AppController extends Controller
         parent::initialize();
         $this->loadComponent('Flash');
         $this->loadComponent('Auth', [
-            'authorize' => ['Controller'],
+//            'authorize' => ['Controller'],
             'loginRedirect' => [
-                'controller' => 'Pages',
-                'action' => 'display',
-                'home'
+                'controller' => 'Blogs',
+                'action' => 'dashboard'
             ],
             'logoutRedirect' => [
                 'controller' => 'Users',
-                'action' => 'logout'
+                'action' => 'login'
             ],
-            'authError' => __('Vous devez vous identifier pour effectuer cette requette'),
+            'authError' => __('Merci de vous connecter'),
             'authenticate' => [
                 'Form' => [
                     'fields' => ['username' => 'email']
@@ -45,11 +44,20 @@ class AppController extends Controller
         ]);
     }
 
-    public function isAuthorized($user)
-    {
-        return false;
-    }
-
+//    public function isAuthorized($user)
+//    {
+//        if (isset($this->request->prefix)) {
+//            if (isset($user['role'])) {
+//                if ($this->request->prefix === 'admin' && $user['role'] === 'admin') {
+//                    return true;
+//                }
+//                if ($this->request->prefix === 'author' && $user['role'] === 'author') {
+//                    return true;
+//                }
+//            }
+//            return false;
+//        }
+//    }
     public function beforeFilter(Event $event)
     {
         $this->Auth->allow(['display']);
@@ -57,12 +65,16 @@ class AppController extends Controller
 
     public function beforeRender(Event $event)
     {
-        if ($this->Auth->user()) {
-            $this->layout = $this->Auth->user('role') ;
+        if ($this->request->prefix === 'admin') {
+            $this->layout = 'admin';
+        }
+        if ($this->request->prefix === 'author') {
+            $this->layout = 'author';
         }
         if($this->request->is('ajax')){
             $this->layout = 'ajax';
         }
+
     }
 
 

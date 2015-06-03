@@ -22,7 +22,6 @@ class Blog extends Entity
         'language' => true,
         'basic_color' => true,
         'state' => true,
-        'user_id' => true,
         'domain_id' => true,
         'created_at' => true,
         'updated_at' => true,

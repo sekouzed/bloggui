@@ -1,20 +1,12 @@
 <?php
-namespace App\Controller;
+namespace App\Controller\Author;
 
 use App\Controller\AppController;
 
-/**
- * Posts Controller
- *
- * @property \App\Model\Table\PostsTable $Posts
- */
+
 class PostsController extends AppController
 {
-    /**
-     * Index method
-     *
-     * @return void
-     */
+
     public function index()
     {
         $this->paginate = [
@@ -24,13 +16,6 @@ class PostsController extends AppController
         $this->set('_serialize', ['posts']);
     }
 
-    /**
-     * View method
-     *
-     * @param string|null $id Post id.
-     * @return void
-     * @throws \Cake\Network\Exception\NotFoundException When record not found.
-     */
     public function view($id = null)
     {
         $post = $this->Posts->get($id, [

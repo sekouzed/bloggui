@@ -1,19 +1,19 @@
 <div class="row-actions">
 
 <?php
-    if($view){
+    if(isset($view) && $view){
         echo $this->Html->link('<i class="fa fa-folder-open-o"></i>',
             ['action' =>'view', $item_id],
             ['class' => 'btn btn-xs default','escape'=>false, 'title' => __('View')]
         );
     }
-    if($edit){
+    if(isset($edit) && $edit){
         echo $this->Html->link('<i class="fa fa-edit"></i>',
             ['action' =>'edit', $item_id],
             ['class' => 'btn btn-xs blue','escape'=>false, 'title' => __('Edit')]
         );
     }
-    if($validate){
+    if(isset($validate) && $validate){
         echo $this->Html->link('<i class="fa fa-check-square-o"></i>',
             ['action' =>'validate', $item_id],
             [
@@ -24,7 +24,7 @@
             ]
         );
     }
-    if($delete){
+    if(isset($delete) && $delete){
         echo $this->Html->link('<i class="fa fa-trash-o"></i>',
             ['action' =>'delete', $item_id],
             [

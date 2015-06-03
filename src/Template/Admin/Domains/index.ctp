@@ -26,22 +26,18 @@
                         <td><?= h($domain->slug) ?></td>
                         <td><?= $this->Text->autoParagraph(h($domain->description)); ?></td>
                         <td class="actions">
-                            <?= $this->Html->link(__('View'), ['action' => 'view', $domain->id]) ?>
-                            <?= $this->Html->link(__('Edit'), ['action' => 'edit', $domain->id]) ?>
-                            <?= $this->Form->postLink(__('Delete'), ['action' => 'delete', $domain->id], ['confirm' => __('Are you sure you want to delete # {0}?', $domain->id)]) ?>
+                            <?= $this->element('row_actions',[
+                                'item_id'=> $domain->id,
+                                'view'=>true,
+                                'edit'=>true,
+                                'delete'=>true
+                            ]) ?>
                         </td>
                     </tr>
                 <?php endforeach; ?>
             </tbody>
         </table>
-        <div class="paginator">
-            <i><?= $this->Paginator->counter() ?></i>
-            <ul class="pagination">
-                <?= $this->Paginator->prev('< ' . __('previous')) ?>
-                <?= $this->Paginator->numbers() ?>
-                <?= $this->Paginator->next(__('next') . ' >') ?>
-            </ul>
-        </div>
+        <?= $this->element('pagination') ?>
     </div>
 
 </div>

@@ -27,9 +27,10 @@ class User extends Entity
         'city' => true,
         'state' => true,
         'role' => true,
+        'blog_id' => true,
         'created_at' => true,
         'updated_at' => true,
-        'blogs' => true,
+        'blog' => true,
     ];
 
     protected function _setPassword($password)
