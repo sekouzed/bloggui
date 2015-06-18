@@ -1,55 +1,51 @@
-<div class="actions columns large-2 medium-3">
-    <h3><?= __('Actions') ?></h3>
-    <ul class="side-nav">
-        <li><?= $this->Html->link(__('New Rubric'), ['action' => 'add']) ?></li>
-        <li><?= $this->Html->link(__('List Blogs'), ['controller' => 'Blogs', 'action' => 'index']) ?></li>
-        <li><?= $this->Html->link(__('New Blog'), ['controller' => 'Blogs', 'action' => 'add']) ?></li>
-        <li><?= $this->Html->link(__('List Posts'), ['controller' => 'Posts', 'action' => 'index']) ?></li>
-        <li><?= $this->Html->link(__('New Post'), ['controller' => 'Posts', 'action' => 'add']) ?></li>
-    </ul>
-</div>
-<div class="rubrics index large-10 medium-9 columns">
-    <table cellpadding="0" cellspacing="0">
-    <thead>
-        <tr>
-            <th><?= $this->Paginator->sort('id') ?></th>
-            <th><?= $this->Paginator->sort('title') ?></th>
-            <th><?= $this->Paginator->sort('slug') ?></th>
-            <th><?= $this->Paginator->sort('parent_id') ?></th>
-            <th><?= $this->Paginator->sort('lft') ?></th>
-            <th><?= $this->Paginator->sort('rght') ?></th>
-            <th><?= $this->Paginator->sort('blog_id') ?></th>
-            <th class="actions"><?= __('Actions') ?></th>
-        </tr>
-    </thead>
-    <tbody>
-    <?php foreach ($rubrics as $rubric): ?>
-        <tr>
-            <td><?= $this->Number->format($rubric->id) ?></td>
-            <td><?= h($rubric->title) ?></td>
-            <td><?= h($rubric->slug) ?></td>
-            <td><?= $this->Number->format($rubric->parent_id) ?></td>
-            <td><?= $this->Number->format($rubric->lft) ?></td>
-            <td><?= $this->Number->format($rubric->rght) ?></td>
-            <td>
-                <?= $rubric->has('blog') ? $this->Html->link($rubric->blog->name, ['controller' => 'Blogs', 'action' => 'view', $rubric->blog->id]) : '' ?>
-            </td>
-            <td class="actions">
-                <?= $this->Html->link(__('View'), ['action' => 'view', $rubric->id]) ?>
-                <?= $this->Html->link(__('Edit'), ['action' => 'edit', $rubric->id]) ?>
-                <?= $this->Form->postLink(__('Delete'), ['action' => 'delete', $rubric->id], ['confirm' => __('Are you sure you want to delete # {0}?', $rubric->id)]) ?>
-            </td>
-        </tr>
 
-    <?php endforeach; ?>
-    </tbody>
-    </table>
-    <div class="paginator">
-        <ul class="pagination">
-            <?= $this->Paginator->prev('< ' . __('previous')) ?>
-            <?= $this->Paginator->numbers() ?>
-            <?= $this->Paginator->next(__('next') . ' >') ?>
-        </ul>
-        <p><?= $this->Paginator->counter() ?></p>
+<div class="row">
+    <div class="col-md-12">
+        <div class="table-toolbar">
+            <?= $this->Html->link(__('Add New').
+                ' <i class="fa fa-plus"></i>',
+                ['action' => 'add'],
+                ['class'=>'btn green','escape'=>false]
+            )?>
+        </div>
+        <?php foreach ($rubricsList as $rubric) {
+                echo $rubric . "<br>";
+        }?>
+        <table class="table table-bordered table-hover">
+            <thead>
+            <tr>
+                <th><?= $this->Paginator->sort('id') ?></th>
+                <th><?= $this->Paginator->sort('parent_id') ?></th>
+                <th><?= $this->Paginator->sort('lft') ?></th>
+                <th><?= $this->Paginator->sort('rght') ?></th>
+                <th><?= $this->Paginator->sort('title') ?></th>
+                <th><?= $this->Paginator->sort('slug') ?></th>
+                <th><?= $this->Paginator->sort('created') ?></th>
+                <th class="actions"><?= __('Actions') ?></th>
+            </tr>
+            </thead>
+            <tbody>
+            <?php foreach ($rubrics as $rubric): ?>
+                <tr>
+                    <td><?= $this->Number->format($rubric->id) ?></td>
+                    <td><?= $this->Number->format($rubric->parent_id) ?></td>
+                    <td><?= $this->Number->format($rubric->lft) ?></td>
+                    <td><?= $this->Number->format($rubric->rght) ?></td>
+                    <td><?= h($rubric->title) ?></td>
+                    <td><?= h($rubric->slug) ?></td>
+                    <td><?= h($rubric->created) ?></td>
+                    <td class="actions">
+                        <?= $this->Html->link(__('Voir'), ['action' => 'view', $rubric->id]) ?>
+                        <?= $this->Html->link(__('Modifier'), ['action' => 'edit', $rubric->id]) ?>
+                        <?= $this->Form->postLink(__('Supprimer'), ['action' => 'delete', $rubric->id], ['confirm' => __('Etes vous sur de vouloir supprimer # {0}?', $rubric->id)]) ?>
+                        <?= $this->Form->postLink(__('Descendre'), ['action' => 'move_down', $rubric->id], ['confirm' => __('Etes vous sur de vouloir descendre # {0}?', $rubric->id)]) ?>
+                        <?= $this->Form->postLink(__('Monter'), ['action' => 'move_up', $rubric->id], ['confirm' => __('Etes vous sur de vouloir monter # {0}?', $rubric->id)]) ?>
+                    </td>
+                </tr>
+            <?php endforeach; ?>
+            </tbody>
+        </table>
+        <?= $this->element('pagination') ?>
     </div>
+
 </div>

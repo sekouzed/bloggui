@@ -18,6 +18,7 @@ class UsersTable extends Table
         $this->table('users');
         $this->displayField('name');
         $this->primaryKey('id');
+        $this->addBehavior('Timestamp');
         $this->belongsTo('Blogs', [
             'foreignKey' => 'blog_id',
             'joinType' => 'INNER'

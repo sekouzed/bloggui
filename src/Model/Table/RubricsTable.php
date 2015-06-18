@@ -7,24 +7,17 @@ use Cake\ORM\RulesChecker;
 use Cake\ORM\Table;
 use Cake\Validation\Validator;
 
-/**
- * Rubrics Model
- */
+
 class RubricsTable extends Table
 {
-
-    /**
-     * Initialize method
-     *
-     * @param array $config The configuration for the Table.
-     * @return void
-     */
     public function initialize(array $config)
     {
         $this->table('rubrics');
         $this->displayField('title');
         $this->primaryKey('id');
         $this->addBehavior('Tree');
+        $this->addBehavior('Timestamp');
+        $this->addBehavior('Sluggable');
         $this->belongsTo('ParentRubrics', [
             'className' => 'Rubrics',
             'foreignKey' => 'parent_id'
@@ -40,8 +33,6 @@ class RubricsTable extends Table
             'className' => 'Rubrics',
             'foreignKey' => 'parent_id'
         ]);
-        $this->addBehavior('Timestamp');
-        $this->addBehavior('Sluggable');
     }
 
     /**

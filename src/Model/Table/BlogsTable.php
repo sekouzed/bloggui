@@ -19,6 +19,7 @@ class BlogsTable extends Table
         $this->table('blogs');
         $this->displayField('title');
         $this->primaryKey('id');
+        $this->addBehavior('Timestamp');
         $this->hasOne('Users', [
             'foreignKey' => 'blog_id'
         ]);
@@ -32,7 +33,6 @@ class BlogsTable extends Table
         $this->hasMany('Rubrics', [
             'foreignKey' => 'blog_id'
         ]);
-        $this->addBehavior('Timestamp');
     }
 
     public function validationDefault(Validator $validator)

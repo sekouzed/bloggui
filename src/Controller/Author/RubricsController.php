@@ -3,49 +3,55 @@ namespace App\Controller\Author;
 
 use App\Controller\AppController;
 
-/**
- * Rubrics Controller
- *
- * @property \App\Model\Table\RubricsTable $Rubrics
- */
 class RubricsController extends AppController
 {
 
-    /**
-     * Index method
-     *
-     * @return void
-     */
+//    public function index()
+//    {
+//        $this->paginate = [
+//            'contain' => ['ParentRubrics']
+//        ];
+//        $this->set('rubrics', $this->paginate($this->Rubrics));
+//    }
     public function index()
     {
-        $this->paginate = [
-            'contain' => ['ParentRubrics', 'Blogs']
-        ];
-        $this->set('rubrics', $this->paginate($this->Rubrics));
-        $this->set('_serialize', ['rubrics']);
-    }
+        $rubrics = $this->Rubrics->find('threaded')
+            ->order(['lft' => 'ASC']);
+        $this->set('rubrics', $this->paginate($rubrics));
 
-    /**
-     * View method
-     *
-     * @param string|null $id Rubric id.
-     * @return void
-     * @throws \Cake\Network\Exception\NotFoundException When record not found.
-     */
-    public function view($id = null)
-    {
-        $rubric = $this->Rubrics->get($id, [
-            'contain' => ['ParentRubrics', 'Blogs', 'Posts', 'ChildRubrics']
+        $rubricsList = $this->Rubrics->find('treeList', [
+//            'keyPath' => 'title',
+//            'valuePath' => 'id',
+            'spacer' => '__'
         ]);
-        $this->set('rubric', $rubric);
-        $this->set('_serialize', ['rubric']);
+//        debug($rubricsList);
+        $this->set(compact('rubricsList'));
     }
 
-    /**
-     * Add method
-     *
-     * @return void Redirects on successful add, renders view otherwise.
-     */
+    public function move_up($id = null)
+    {
+        $this->request->allowMethod(['post', 'put']);
+        $rubric = $this->Rubrics->get($id);
+        if ($this->Rubrics->moveUp($rubric)) {
+            $this->Flash->success('The rubric has been moved Up.');
+        } else {
+            $this->Flash->error('The rubric could not be moved up. Please, try again.');
+        }
+        return $this->redirect($this->referer(['action' => 'index']));
+    }
+
+    public function move_down($id = null)
+    {
+        $this->request->allowMethod(['post', 'put']);
+        $rubric = $this->Rubrics->get($id);
+        if ($this->Rubrics->moveDown($rubric)) {
+            $this->Flash->success('The rubric has been moved down.');
+        } else {
+            $this->Flash->error('The rubric could not be moved down. Please, try again.');
+        }
+        return $this->redirect($this->referer(['action' => 'index']));
+    }
+
     public function add()
     {
         $rubric = $this->Rubrics->newEntity();
@@ -58,19 +64,10 @@ class RubricsController extends AppController
                 $this->Flash->error(__('The rubric could not be saved. Please, try again.'));
             }
         }
-        $parentRubrics = $this->Rubrics->ParentRubrics->find('list', ['limit' => 200]);
-        $blogs = $this->Rubrics->Blogs->find('list', ['limit' => 200]);
-        $this->set(compact('rubric', 'parentRubrics', 'blogs'));
-        $this->set('_serialize', ['rubric']);
+        $parentRubrics = $this->Rubrics->ParentRubrics->find('treeList');
+        $this->set(compact('rubric', 'parentRubrics'));
     }
 
-    /**
-     * Edit method
-     *
-     * @param string|null $id Rubric id.
-     * @return void Redirects on successful edit, renders view otherwise.
-     * @throws \Cake\Network\Exception\NotFoundException When record not found.
-     */
     public function edit($id = null)
     {
         $rubric = $this->Rubrics->get($id, [
@@ -85,19 +82,10 @@ class RubricsController extends AppController
                 $this->Flash->error(__('The rubric could not be saved. Please, try again.'));
             }
         }
-        $parentRubrics = $this->Rubrics->ParentRubrics->find('list', ['limit' => 200]);
-        $blogs = $this->Rubrics->Blogs->find('list', ['limit' => 200]);
-        $this->set(compact('rubric', 'parentRubrics', 'blogs'));
-        $this->set('_serialize', ['rubric']);
+        $parentRubrics = $this->Rubrics->ParentRubrics->find('treeList');
+        $this->set(compact('rubric', 'parentRubrics'));
     }
 
-    /**
-     * Delete method
-     *
-     * @param string|null $id Rubric id.
-     * @return void Redirects to index.
-     * @throws \Cake\Network\Exception\NotFoundException When record not found.
-     */
     public function delete($id = null)
     {
         $this->request->allowMethod(['post', 'delete']);

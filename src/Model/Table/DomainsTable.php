@@ -18,11 +18,11 @@ class DomainsTable extends Table
         $this->table('domains');
         $this->displayField('title');
         $this->primaryKey('id');
+        $this->addBehavior('Timestamp');
+        $this->addBehavior('Sluggable');
         $this->hasMany('Blogs', [
             'foreignKey' => 'domain_id'
         ]);
-        $this->addBehavior('Timestamp');
-        $this->addBehavior('Sluggable');
     }
 
     public function validationDefault(Validator $validator)

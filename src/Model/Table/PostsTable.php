@@ -24,6 +24,8 @@ class PostsTable extends Table
         $this->table('posts');
         $this->displayField('title');
         $this->primaryKey('id');
+        $this->addBehavior('Timestamp');
+        $this->addBehavior('Sluggable');
         $this->belongsTo('Rubrics', [
             'foreignKey' => 'rubric_id',
             'joinType' => 'INNER'
@@ -32,8 +34,6 @@ class PostsTable extends Table
             'foreignKey' => 'blog_id',
             'joinType' => 'INNER'
         ]);
-        $this->addBehavior('Timestamp');
-        $this->addBehavior('Sluggable');
     }
 
     /**
